@@ -131,3 +131,26 @@ void testeApp3Size_40MB(){
 }
 
 #endif
+
+2.1.4 - Factors Affecting Time Complexity
+ 3.1 - Tree Trie
+3.1.1 - History
+3.1.3 - Time Complexity of Trie Operations
+3.1.3.1 - Вставка :
+3.1.3.2 - Поиск :
+3.1.3.3 - Удаление :
+3.1.3.1 - Поиск по префиксу:
+3.1.4 - Пространственная сложност
+2 - Главе № 2
+2.1 - Implementation Binary Search Tree
+2.1.1 - Implementation Test Binary Search Tree and result
+2.2 - Implementation Hash Table
+2.2.1 - Implementation Test Hash Table and result
+2.3 - Implementation Tree Trie
+2.3.1 - Implementation Test Tree Trie
+Заключение
+Приложение
+Библиография
+
+
+
