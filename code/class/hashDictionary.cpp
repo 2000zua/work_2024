@@ -1,51 +1,76 @@
 #pragma once
-#ifndef algaritmo_hash_table
+#ifndef algaritmo_hash_table_My
 
 #include <iostream>
-#include <fstream>
+#include <vector>
+#include <list>
 #include <string>
+#include <fstream>
 #include <unordered_map>
 #include "../headers/json.hpp"
+#include <stdexcept>
 
 using json = nlohmann::json;
 using namespace std;
 
-// Classe do Dicionário usando Tabela Hash
+
 class HashDictionary {
-public:
-    void insert(const string& key, const json& meanings) {
-        // Inserindo a chave e seus significados na tabela hash
-        hash_table[key] = meanings;
-    }
-
-    bool search(const string& key) {
-        auto it = hash_table.find(key);
-        if (it != hash_table.end()) {
-            cout << "\tChave encontrada: " << it->first << endl;
-            cout << "\tSignificados:" << endl;
-            for (auto& meaning : it->second.items()) {
-                cout <<"\t\t"<< meaning.key() << ": " << meaning.value()[1] << endl;
-            }
-            return true;
-        } else {
-            cout << "Chave não encontrada: " << key << endl;
-            return false;
-        }
-    }
-
-    void print() {
-        // Imprimindo todas as chaves e seus significados na tabela hash
-        for (const auto& pair : hash_table) {
-            cout << pair.first << ": " << endl;
-            for (auto& meaning : pair.second.items()) {
-                cout << meaning.key() << ": " << meaning.value()[1] << endl;
-            }
-        }
-        cout << endl;
-    }
-
 private:
-    unordered_map<string, json> hash_table;
+    int numBuckets;
+    std::vector<std::list<std::pair<std::string, std::unordered_map<std::string, nlohmann::json>>>> table;
+
+    int hashFunction(const std::string& key) {
+        int hash = 0;
+        for (char c : key) {
+            hash += c;
+        }
+        return hash % numBuckets;
+    }
+
+public:
+    HashDictionary(int size) {
+        numBuckets = size;
+        table.resize(numBuckets);
+    }
+
+    void insert(const std::string& key, const std::unordered_map<std::string, nlohmann::json>& value) {
+        int index = hashFunction(key);
+        for (auto& kv : table[index]) {
+            if (kv.first == key) {
+                kv.second = value;
+                return;
+            }
+        }
+        table[index].emplace_back(key, value);
+    }
+
+    void printMeanings(const nlohmann::json& meanings) {
+        for (auto& [key, value] : meanings.items()) {
+            std::cout << "Meaning ID: " << key << std::endl;
+            std::cout << "\tPart of Speech: " << value[0] << std::endl;
+            std::cout << "\tDefinition: " << value[1] << std::endl;
+            std::cout << "\tExamples: " << std::endl;
+            for (const auto& example : value[2]) {
+                std::cout << "\t\t - " << example << std::endl;
+            }
+            std::cout << "Additional Notes: " << std::endl;
+            for (const auto& note : value[3]) {
+                std::cout << "\t\t - " << note <<std::endl;
+            }
+            cout <<"\n";
+        }
+    }
+
+    std::unordered_map<std::string, nlohmann::json> search(const std::string& key) {
+        int index = hashFunction(key);
+        for (const auto& kv : table[index]) {
+            if (kv.first == key) {
+                return kv.second;
+            }
+        }
+        throw std::runtime_error("Key dont't found");
+    }
+
 };
 
 #endif

@@ -6,9 +6,11 @@
 #include "../common/load_file.cpp"
 #include "../class/hashDictionary.cpp"
 
+using namespace std;
+
 // file with 1526 line and size 30KB
 void testeApp2Size_1MB(){
-    HashDictionary dict = HashDictionary();
+    HashDictionary dict = HashDictionary(4024);
     string filename = "data/DG.json"; 
 
     cout << "TESTE WITH 60.000 LINE"<<endl;
@@ -51,7 +53,7 @@ void testeApp2Size_1MB(){
 
 // file with 15921 line and size 300KB
 void testeApp2Size_4MB(){
-    HashDictionary dict = HashDictionary();
+    HashDictionary dict = HashDictionary(10024);
     string filename = "data/DS.json"; 
 
     cout << "TESTE WITH 200.000 LINE"<<endl;
@@ -93,7 +95,7 @@ void testeApp2Size_4MB(){
 
 // file with 1526 line and size 40MB
 void testeApp2Size_40MB(){
-    HashDictionary dict = HashDictionary();
+    HashDictionary dict = HashDictionary(1000);
     string filename = "data/data.json"; 
 
     cout << "TESTE WITH 2.000.000 LINE"<<endl;

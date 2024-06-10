@@ -11,21 +11,23 @@
 using json = nlohmann::json;
 using namespace std;
 
+void funcionalApp();
 
 // Exemplo de uso
 int main() {
     // testeAppSize_30kB();
-    testeAppSize_300kB();
+    //testeAppSize_300kB();
     // testeAppSize_1MB();
     // testeAppSize_5MB();
-    //testeAppSize_40MB();
+    // testeAppSize_40MB();
+    funcionalApp();
     return 0;
 }
 
 
 void funcionalApp(){
     BinarySearchTree bst = BinarySearchTree();
-    string filename = "";  // Nome do arquivo JSON contendo as palavras do dicionário
+    string filename = ""; 
     bool run = true;
     string search_word = "";
 
@@ -47,7 +49,7 @@ void funcionalApp(){
             
             // time start
             auto start = std::chrono::high_resolution_clock::now();
-            loadWordsFromJson(filename, bst);
+            loadWordsFromJsonApp1(filename, bst);
             //cout << "Busca por '"<<search_word<<"' : "<<endl;
             bst.search(search_word);
             // time out
@@ -55,7 +57,7 @@ void funcionalApp(){
 
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
             
-            cout << "Tempo de execução: " << duration.count() /1000000<< " microssegundos\n\n" << endl;
+            cout << "Tempo de execução: " << duration.count()<< " microssegundos\n\n" << endl;
         } else {
             cout << "A palavra inserida está vazia." << endl;
         }

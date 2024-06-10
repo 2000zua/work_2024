@@ -35,14 +35,14 @@ public:
         int position = 1;
         Node* result = _search(root, key, position);
         if (result != nullptr) {
-            std::cout << "\tSignificados:" << endl;
+            std::cout << "\tMeanings:" << endl;
             for (auto& meaning : result->meanings.items()) {
                 std::cout<<"\t\t"<< meaning.key() << ": " << meaning.value()[1] << endl;
             }
-            std::cout << "\tPosição na árvore: \n\t\t" << position << endl;
+            std::cout << "\tPosition in tree: \n\t\t" << position << endl;
             return true;
         } else {
-            std::cout << "Chave não encontrada: " << key << endl;
+            std::cout << "Key don't found: " << key << endl;
             return false;
         }
     }

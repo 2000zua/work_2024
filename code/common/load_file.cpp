@@ -5,6 +5,7 @@
 #include "../headers/json.hpp"
 #include "../class/binarySearchTree.cpp"
 #include "../class/hashDictionary.cpp"
+#include "../class/treeTreiCode.cpp"
 
 // Função para carregar palavras de um arquivo JSON
 void loadWordsFromJsonApp1(const string& filename, BinarySearchTree& structure) {
@@ -45,4 +46,23 @@ void loadWordsFromJsonApp2(const string& filename, HashDictionary& dict) {
     }
 }
 
+
+// Função para carregar dados de um arquivo JSON e inserir na Trie
+void loadWordsFromJsonApp3(const std::string& filename, Trie& trie) {
+    std::ifstream inputFile(filename);
+    if (!inputFile.is_open()) {
+        throw std::runtime_error("Could not open file");
+    }
+
+    json jsonData;
+    inputFile >> jsonData;
+
+    for (auto it = jsonData.begin(); it != jsonData.end(); ++it) {
+        const std::string& word = it.key();
+        const json& data = it.value();
+        if (data.contains("MEANINGS")) {
+            trie.insert(word, data["MEANINGS"]);
+        }
+    }
+}
 #endif

@@ -182,7 +182,6 @@ void testeAppSize_40MB(){
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
     cout << "\nTempo de execução for load the data and insert in the struture: " << duration.count()<< " microseconds.\n\n" << endl;
     
-    /*
     cout << "Busca por 'AARON': in  the start of tree" << endl;
     start = std::chrono::high_resolution_clock::now();
     bst.search("AARON");
@@ -206,7 +205,7 @@ void testeAppSize_40MB(){
     end = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
     cout << "Tempo de execução for search the and in the tree: " << duration.max << " microseconds.\n" << endl;
-    cout << endl;*/
+    cout << endl;
 }
 
 #endif
